@@ -32,11 +32,16 @@ proc process_file(file: string): seq[string] =
   return slides
 
 
-proc fun(file="filename"): int=
+proc fun(file="filename", speed_test: bool = false): int=
   print("Preparing generation...")
   let slides = process_file(file)
 
   print("Generated, starting service")
+
+  if speed_test == true:
+    discard myRenderProc(slides)
+    result = 0
+    return result
 
   # Silence Jester
   logging.setLogFilter(lvlError)
@@ -51,4 +56,7 @@ proc fun(file="filename"): int=
   
   result = 0 
 
-import cligen; dispatch fun
+import cligen; dispatch fun, help = {
+  "file": "Takes a file path to the markdown file",
+  "speed_test": "Does a speed test for conversion of markdown to the html page",
+  }
