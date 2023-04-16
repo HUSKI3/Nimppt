@@ -24,6 +24,31 @@ This is a simple presentation generator written in Nim. It takes a markdown file
 - Hassle free
 - Automatically formatted
 
+## Usage
+Using nimppt is simple
+
+First you need to create a markdown file which will have the slides and content of the presentation.
+```md
+# Title
+Body
+- list item 1
+- list item 2
+> Description
+![image](image-source.png)
+```
+
+Then you can start nimppt with the following:
+```bash
+# Host the web server
+$ ./nimppt -f your_presentation.md
+
+# Do a speed test
+$ time ./nimppt -f your_presentation.md --speed_test
+```
+
+### Output!
+![demo](https://cdn.lewd.host/LnMxupgT.gif)
+
 ## Installation
 Easiest way to get started is by installing the binary from the releases
 
