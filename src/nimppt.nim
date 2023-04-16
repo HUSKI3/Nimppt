@@ -8,8 +8,7 @@ from os import `/`
 proc myRenderProc(slides: seq[string]): string =
   compileTemplateFile(getScriptDir() / "base.html")
 
-proc process_file(file: string): seq[string] = 
-  let content = readFile(file)
+proc process_content(content: string): seq[string] = 
   var slides: seq[string] = @[]
   var current_content: string
 
@@ -34,7 +33,7 @@ proc process_file(file: string): seq[string] =
 
 proc fun(file="filename", speed_test: bool = false): int=
   print("Preparing generation...")
-  let slides = process_file(file)
+  let slides = process_content(readFile(file))
 
   print("Generated, starting service")
 
@@ -56,7 +55,16 @@ proc fun(file="filename", speed_test: bool = false): int=
   
   result = 0 
 
-import cligen; dispatch fun, help = {
-  "file": "Takes a file path to the markdown file",
-  "speed_test": "Does a speed test for conversion of markdown to the html page",
-  }
+
+import cligen
+
+when isMainModule:
+  dispatch fun, help = {
+    "file": "Takes a file path to the markdown file",
+    "speed_test": "Does a speed test for conversion of markdown to the html page",
+    }
+
+
+# For testing
+export process_content
+export myRenderProc
