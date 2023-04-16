@@ -8,7 +8,7 @@ from os import `/`
 proc myRenderProc(slides: seq[string]): string =
   compileTemplateFile(getScriptDir() / "base.html")
 
-proc process_content(content: string): seq[string] = 
+proc process_content(content: string): seq[string] =
   var slides: seq[string] = @[]
   var current_content: string
 
@@ -27,11 +27,11 @@ proc process_content(content: string): seq[string] =
   # for i, slide in slides:
     # print(f"Slide {i}:")
     # print(slide)
-  
+
   return slides
 
 
-proc fun(file="filename", speed_test: bool = false): int=
+proc fun(file: string, speed_test: bool = false): int =
   print("Preparing generation...")
   let slides = process_content(readFile(file))
 
@@ -44,16 +44,16 @@ proc fun(file="filename", speed_test: bool = false): int=
 
   # Silence Jester
   logging.setLogFilter(lvlError)
- 
+
   router myrouter:
     get "/":
       resp myRenderProc(slides)
 
-  var customSettings = newSettings(port=Port(8000))
-  var myjester = initJester(myrouter, settings=customSettings)
+  var customSettings = newSettings(port = Port(8000))
+  var myjester = initJester(myrouter, settings = customSettings)
   myjester.serve()
-  
-  result = 0 
+
+  result = 0
 
 
 import cligen

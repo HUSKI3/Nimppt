@@ -50,14 +50,18 @@ $ time ./nimppt -f your_presentation.md --speed_test
 ![demo](https://cdn.lewd.host/LnMxupgT.gif)
 
 ## Installation
-Easiest way to get started is by installing the binary from the releases
+Easiest way to get started is by installing the binary from the releases.
+A better solution is to do the following:
+```bash
+$ git clone https://github.com/HUSKI3/Nimppt.git
+$ nimble install
+```
 
 ## Modifying Nimppt
 Modifying nimppt is easy, all you need to do is clone the repository, and change the `base.html` file!
 
 ```bash
 $ git clone https://github.com/HUSKI3/Nimppt.git
-$ nimble install
 # To build
 $ nimble build
 # To run tests
