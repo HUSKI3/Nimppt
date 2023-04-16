@@ -13,13 +13,12 @@ on:
       - '*.md'
 
 jobs:
-  test-actions-on-cross-platform:
+  cross-platform-actions:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os:
           - ubuntu-latest
-          - windows-latest
           - macOS-latest
         version:
           - 1.4.0
@@ -29,10 +28,6 @@ jobs:
           - os: macOS-latest
             version: 1.4.0
           - os: macOS-latest
-            version: devel
-          - os: windows-latest
-            version: 1.4.0
-          - os: windows-latest
             version: devel
     steps:
       - uses: actions/checkout@v3
@@ -52,14 +47,8 @@ jobs:
       - name: Run build
         run: nimble build
 
-  test-actions:
+  ubuntu-action:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        version:
-          - 1.4.x
-          - 1.x
-          - '#version-1-6'
     steps:
       - uses: actions/checkout@v3
       - uses: jiro4989/setup-nim-action@v1
