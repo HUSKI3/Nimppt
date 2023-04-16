@@ -45,6 +45,8 @@ jobs:
         run: nim -v
       - name: Print Nimble version
         run: nimble -v
+      - name: Install dependencies
+        run: nimble install
       - name: Run tests
         run: nimble test
       - name: Run build
@@ -69,6 +71,8 @@ jobs:
         run: nim -v
       - name: Print Nimble version
         run: nimble -v
+      - name: Install dependencies
+        run: nimble install
       - name: Run tests
         run: nimble test
       - name: Run build
