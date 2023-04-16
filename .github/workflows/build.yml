@@ -46,7 +46,7 @@ jobs:
       - name: Print Nimble version
         run: nimble -v
       - name: Install dependencies
-        run: nimble install
+        run: yes | nimble install
       - name: Run tests
         run: nimble test
       - name: Run build
@@ -72,7 +72,7 @@ jobs:
       - name: Print Nimble version
         run: nimble -v
       - name: Install dependencies
-        run: nimble install
+        run: yes | nimble install
       - name: Run tests
         run: nimble test
       - name: Run build
