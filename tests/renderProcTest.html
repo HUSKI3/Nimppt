@@ -1,0 +1,541 @@
+<head>
+<style>@import url('https://fonts.googleapis.com/css?family=Baloo+Bhaina');
+
+    html {
+      height: 100%;
+      width: 100%;
+    }
+    body {
+      height: 100vh;
+      width: 100vw;
+      padding: 0;
+      margin: 0;
+      counter-reset: section; 
+      background: #202020;
+    }
+    h1 {
+      font-family: 'Baloo Bhaina', cursive;
+      font-size: 4em;
+      line-height: 1.5em;
+      text-align: center;
+      margin-top: 1%;
+      color: #222;
+    }
+    h2 {
+      font-family: 'Baloo Bhaina', cursive;
+      line-height: 1.5em;
+      text-align: center;
+      margin-top: 1%;
+      color: #222;
+      font-size: 3em;
+    }
+    h3 {
+      font-family: 'Baloo Bhaina', cursive;
+      line-height: 1.5em;
+      text-align: center;
+      margin-top: 1%;
+      color: #222;
+      font-size: 2em;
+    }
+    p {
+      font-family: 'Baloo Bhaina', cursive;
+      font-size: 1.3em;
+      line-height: 1.2em;
+      text-align: center;
+      color: #333;
+      padding: 2% 10%;
+    }
+    li {
+      font-family: 'Baloo Bhaina', cursive;
+      font-size: 1em;
+      line-height: 0.1em;
+      color: #333;
+      padding: 2% 10%;
+    }
+    ul {
+      margin: 0 auto;
+      width: 30em;
+    }
+    pre {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-left: 3px solid #f36d33;
+    color: #666;
+    page-break-inside: avoid;
+    font-family: monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 1.6em;
+    max-width: 100%;
+    overflow: auto;
+    padding: 1em 1.5em;
+    display: block;
+    word-wrap: break-word;
+    margin-left: auto;
+    margin-right: auto;
+    }
+    blockquote {
+      font-family: 'Baloo Bhaina', cursive;
+      font-style: italic;
+      font-size: 0.8em;
+      line-height: 0.1em;
+      text-align: center;
+      color: #333;
+      padding: 2% 10%;
+      background-color: rgb(80, 80, 80);
+      border-radius: 25px;
+      width: max-content;
+      max-width: 40em;
+    }
+    img {
+      width: 10em;
+      height: auto;
+      position: absolute;
+        top: 0px;
+        right: 0px;
+      padding-top: 1em;
+      padding-right: 1em;
+    }
+    .slide-show {
+      position: relative;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      counter-reset: section; 
+    }
+    .slide-holder {
+      position: absolute;
+      left: 0;
+      top: 0;
+      margin: 0;
+      padding: 0;
+      background: #202020;
+    }
+    
+    .slide {
+      position: relative;
+      height: 100vh;
+      width: 100vw;
+      display: inline-block;
+      margin: 0 100px;
+      padding: 0;
+      background: none;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+    .slide:nth-of-type(1) {
+      margin-left: 0;
+    }
+    
+    .slide-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      white-space: normal;
+      overflow: auto;
+    }
+    
+    .slide-control {
+      position: fixed;
+      z-index: 100;
+      text-align: center;
+      width: 200px;
+      bottom: 10%;
+      left: 50%;
+      -webkit-transform: translateX(-50%) translateZ(0);
+      transform: translateX(-50%) translateZ(0);  
+    }
+    .slide-tracker {
+      display: inline-block;
+      position: absolute;
+      white-space: nowrap;
+      left:50%;
+      top:50%;
+      width: 100px;
+      height: 40px;
+      text-align:left;
+      font-size: 30px;
+      font-family: Helvetica,Arial;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%,-50%);
+      opacity: .2;
+    }
+    .slide-tracker:hover {
+      opacity: .7;
+    }
+    #current-slide {
+      width: 45px;
+      height: 40px;
+      padding: 0;
+      background: none;
+      color: #222;
+      font-size: 30px;
+      font-family: Helvetica,Arial;
+      text-align: right;
+      line-height: 40px;
+      border: none;
+    }
+    #max-slides:before {
+      content: "/";
+      display:inline-block;
+    }
+    #max-slides {
+      display: inline-block;
+      width: 45px;
+      height: 40px;
+      line-height: 40px;
+    }
+    #current-slide:focus{
+        outline: none;
+    }
+    .hidden {
+      display: none !important;
+    }
+    
+    .left-arrow,
+    .right-arrow {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      box-sizing: border-box;
+      border: 3px solid #333;
+      opacity: .2;
+    }
+    .left-arrow:hover,
+    .right-arrow:hover {
+      opacity: .5;
+    }
+    
+    .left-arrow {
+      float: left;
+    }
+    .left-arrow:before {
+      content:"";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 35%;
+      height: 35%;
+      border-left: 4px solid #333;
+      border-bottom: 4px solid #333;
+      -webkit-transform: translate(-30% -50%) rotate(45deg);
+      transform: translate(-30%, -50%) rotate(45deg);
+    }
+    
+    .right-arrow {
+      float: right;
+    }
+    .right-arrow:before {
+      content:"";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 35%;
+      height: 35%;
+      border-right: 4px solid #333;
+      border-bottom: 4px solid #333;
+      -webkit-transform: translate(-70% -50%) rotate(-45deg);
+      transform: translate(-70%, -50%) rotate(-45deg);
+    }
+    
+    /* PRETTY SLIDE BACKGROUNDS 
+       If you want to manually set them */
+    /* .slide:nth-of-type(1) {
+    background: #43C6AC;
+    background: -webkit-linear-gradient(to left, #43C6AC , #F8FFAE);
+    background: linear-gradient(to left, #43C6AC , #F8FFAE);
+    } */
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+    <script>
+        var transitionSpeed = 1; // seconds
+
+var currentSlide = 1; // keeps track of current slide
+var totalSlides = 0; // sets itself
+
+/* This is a group of colors I picked for the 
+different gradient options. */
+var colors = ["#f95757", "#ff7d38", "#ffd06d", "#ffef49", "#c6e549", "#84ea2a", "#5aea4d", "#38ff98", "#1fefc5", "#3de7ed", "#32a6ff", "#8991ff", "#b289ff", "#f8abfc", "#ff6bb7"];
+
+var resizeTimer;
+
+// Move the window when resized
+$(window).on('resize', function(e) {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function() {
+    moveSlide(0.3);
+  }, 250);
+});
+
+$(document).ready(function() {
+  $.each($('.slide'), function(index) {
+    totalSlides += 1;
+    
+    /* For the background generator */
+    var color = $(this).getBg();
+    if (color == false) {
+      var rnum1 = Math.floor(Math.random() * colors.length);
+      var rnum2 = Math.floor(Math.random() * colors.length);
+      // This is to ensure they're not the same color
+      rnum2 = (rnum1 != rnum2) ? rnum2 : (rnum2 != colors.length) ? rnum2 + 1 : 0;
+
+      // $(this).css({
+      //   "background": colors[rnum1],
+      //   "background": "-webkit-linear-gradient(left, " + colors[rnum1] + ", " + colors[rnum2] + ")",
+      //   "background": "-moz-linear-gradient(right, " + colors[rnum1] + ", " + colors[rnum2] + ");",
+      //   "background": "linear-gradient(to left, " + colors[rnum1] + ", " + colors[rnum2] + ")"
+      // });
+    }
+  });
+  $('#max-slides').html(totalSlides);
+  checkNav();
+});
+
+function toNext() {
+  //console.log("toNext - " +currentSlide);
+  if (currentSlide < totalSlides) {
+    currentSlide += 1;
+    
+    if(currentSlide < 1) {
+      currentSlide = 1;
+    }
+    
+    moveSlide();
+    checkNav();
+  }
+}
+
+function toPrev() {
+ // console.log("toPrev - " + currentSlide);
+  if (currentSlide > 1) {
+    currentSlide -= 1;
+    
+    if (currentSlide > totalSlides) {
+      currentSlide = totalSlides;
+    }
+    
+    moveSlide();
+    checkNav();
+  }
+}
+
+function toSlide(next) {
+  var next = (typeof next === 'undefined') ? 1 : next;
+  if (isNaN(next)) {
+    next = 1;
+  }
+  if (next < 1) {
+    next = 1;
+  }
+  if (next > totalSlides) {
+    next = totalSlides;
+  }
+  currentSlide = next;
+  moveSlide();
+  checkNav();
+}
+
+function moveSlide(speed) {
+  var speed = (typeof speed === 'undefined') ? transitionSpeed : speed;
+
+  var position = $('.slide:nth-of-type(' + currentSlide + ')').offset();
+  var xTo = position.left;
+  var yTo = position.top;
+
+  TweenMax.to($('.slide-holder'), speed, {
+    x: "-=" + xTo,
+    y: "-=" + yTo,
+    overwrite: "all"
+  });
+  /* Old stuff before TweenMax
+  $('.slide-holder').stop().animate({
+    left: "-=" + xTo, 
+    top: "-=" + yTo
+  }, speed, 'linear');*/
+  return false;
+}
+
+// Determine whether or not to show the
+// left arrow or the right arrow
+function checkNav() {
+  //currentSlide totalSlides
+  //console.log(currentSlide);
+  $('#current-slide').val(currentSlide);
+
+  if (currentSlide == 1) {
+    $('#left-btn').addClass('hidden');
+  } else {
+    $('#left-btn').removeClass('hidden');
+  }
+  if (currentSlide == totalSlides) {
+    $('#right-btn').addClass('hidden');
+  } else {
+    $('#right-btn').removeClass('hidden');
+  }
+}
+
+/*************************************
+ *       KEYBOARD INPUT SECTION      *
+ *************************************/
+$(window).keydown(function(e) {
+  if (e.keyCode == 39) { toNext();  } // Right arrow
+  if (e.keyCode == 38) { toNext();  } // Up arrow
+  if (e.keyCode == 32) { toNext();  } // Space bar
+  if (e.keyCode == 37) { toPrev();  } // Left arrow
+  if (e.keyCode == 40) { toPrev();  } // Down arrow
+});
+
+// get this element background color or image
+jQuery.fn.getBg = function() {
+  var color = $(this).css('background-color');
+  var image = $(this).css('background-image');
+
+  if (color != 'transparent' && color != 'rgba(0, 0, 0, 0)') {
+    return color;
+  }
+  if (image != 'none') {
+    return image;
+  }
+  return false;
+};
+
+
+
+/*
+  Input change event for slide number
+  
+  Thanks to Surreal Dreams on Stackoverflow
+  http://stackoverflow.com/a/4220182/5667951
+*/
+var typingTimer;                //timer identifier
+var doneTypingInterval = 1000;  //1 second
+var $input = $('#current-slide');
+
+//on keyup, start the countdown
+$input.on('keyup', function () {
+  clearTimeout(typingTimer);
+  typingTimer = setTimeout(doneTyping, doneTypingInterval);
+});
+
+//on keydown, clear the countdown 
+$input.on('keydown', function () {
+  clearTimeout(typingTimer);
+});
+
+//user is "finished typing," do something
+function doneTyping () {
+  toSlide(parseInt($input.val()));
+}
+
+
+/*
+  Mouse Wheel Event
+  
+  Thanks to Jordi van Duijn at stackoverflow
+  http://stackoverflow.com/a/11593342/5667951
+*/
+var mousewheelevt = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
+$('.slide-holder, .slide-control').bind(mousewheelevt, function(e) {
+
+  var evt = window.event || e //equalize event object     
+  evt = evt.originalEvent ? evt.originalEvent : evt; //convert to originalEvent if possible               
+  var delta = evt.detail ? evt.detail * (-40) : evt.wheelDelta //check for detail first, because it is used by Opera and FF
+
+  if (delta > 0) {
+    //scroll up;
+    toPrev();
+  } else {
+    //scroll down
+    toNext();
+  }
+});
+
+/*
+  Swiping handler
+  
+  Code taken from givanse on stackoverflow:
+  http://stackoverflow.com/a/23230280/5667951
+*/
+document.addEventListener('touchstart', handleTouchStart, false);
+document.addEventListener('touchmove', handleTouchMove, false);
+
+var xDown = null;
+var yDown = null;
+
+function handleTouchStart(evt) {
+  xDown = evt.touches[0].clientX;
+  yDown = evt.touches[0].clientY;
+};
+
+function handleTouchMove(evt) {
+  if (!xDown || !yDown) {
+    return;
+  }
+
+  var xUp = evt.touches[0].clientX;
+  var yUp = evt.touches[0].clientY;
+
+  var xDiff = xDown - xUp;
+  var yDiff = yDown - yUp;
+
+  if (Math.abs(xDiff) > Math.abs(yDiff)) { /*most significant*/
+    if (xDiff > 5) {
+      /* right swipe */
+      toNext();
+    } 
+    if (xDiff < -5){
+      /* left swipe */
+      toPrev()
+    }
+  } /*else {
+    if (yDiff > 5) {
+      // up swipe 
+    } 
+    if (yDiff < -5) {
+      // down swipe 
+    }
+  }*/
+  /* reset values */
+  xDown = null;
+  yDown = null;
+};
+      </script>
+</head>
+
+<body>
+    <nav class="slide-control">
+        <div id="left-btn" class="left-arrow hidden" onclick="toPrev()"></div>
+        <div class="slide-tracker">
+          <input type="text" id="current-slide" value="1" onfocus="this.select();" onmouseup="return false;"/><label for="current-slide" id="max-slides"></label>
+        </div>
+        <div id="right-btn" class="right-arrow" onclick="toNext()"></div>
+      </nav>
+      <!-- No CSS needs to be changed for new 
+           slides. Simply put in the new slide -->
+      <section class="slide-show">
+        <div class="slide-holder">
+          <div class="slide">
+            <div class="slide-content">
+              <h1>Example</h1>
+<p>test body</p>
+<blockquote>
+<p>Short</p>
+</blockquote>
+
+            </div>
+          </div>
+          
+      </section>
+      
+</body>
