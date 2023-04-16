@@ -36,7 +36,6 @@ jobs:
             version: devel
     steps:
       - uses: actions/checkout@v3
-      - uses: ./
         with:
           nim-version: ${{ matrix.version }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
@@ -60,7 +59,6 @@ jobs:
           - '#version-1-6'
     steps:
       - uses: actions/checkout@v3
-      - uses: ./
         with:
           nim-version: ${{ matrix.version }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
