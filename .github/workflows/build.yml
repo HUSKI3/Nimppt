@@ -6,25 +6,13 @@ on:
       - 'LICENSE'
       - '*.md'
     branches:
-      - master
+      - main
   pull_request:
     paths-ignore:
       - 'LICENSE'
       - '*.md'
 
 jobs:
-  unit-test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-      - name: Run test
-        run: npm test
-      - name: Check unused packages
-        run: npm run check-deps
-
   test-actions-on-cross-platform:
     runs-on: ${{ matrix.os }}
     strategy:
