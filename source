@@ -1,0 +1,33 @@
+# Nimppt
+## What is nimppt?
+### Nimppt is a simple presentation generator that uses Markdown syntax
+
+---
+
+# Markdown
+### What is Markdown?
+Markdown[9] is a lightweight markup language for creating formatted text using a plain-text editor. John Gruber and Aaron Swartz created Markdown in 2004 as a markup language that is appealing to human readers in its source code form.[9] Markdown is widely used in blogging, instant messaging, online forums, collaborative software, documentation pages, and readme files. 
+> Source: https://en.wikipedia.org/wiki/Markdown aaaaaaaaaaa
+
+![Alt text](https://t.ctcdn.com.br/dA9K5pe8e1jdX29qAie6vdLQVpc=/665x374/smart/filters:format(webp)/i249797.jpeg "a title")
+---
+
+# Nimppt features
+- Easy configuration
+- Hassle free
+- Automatically formatted
+
+```md
+# Title
+description
+> showcase
+![image](source)
+```
+
+---
+# Installation
+Ok, so how do we install it?
+
+It's easy!
+`curl get.nimppt.io -sSf | sh`
+---
