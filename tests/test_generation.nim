@@ -12,9 +12,9 @@ suite "Test suite for slide generation":
     test "Short content generation test":
         let slides = process_content("# Example\ntest body\n>Short\n---\n")
         let compare_against = @["<h1>Example</h1>\n<p>test body</p>\n<blockquote>\n<p>Short</p>\n</blockquote>\n"]
-        check(slides == compare_against)
+        check(slides[0] == compare_against)
 
     test "Multiple slides test":
         let slides = process_content("# Example\ntest body\n>Short\n---\n# Slide 2\ntest body\n>Short\n---")
         let compare_against = @["<h1>Example</h1>\n<p>test body</p>\n<blockquote>\n<p>Short</p>\n</blockquote>\n", "<h1>Slide 2</h1>\n<p>test body</p>\n<blockquote>\n<p>Short</p>\n</blockquote>\n"]
-        check(slides == compare_against)
+        check(slides[0] == compare_against)

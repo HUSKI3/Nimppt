@@ -5,15 +5,20 @@ import jester
 import logging
 from os import `/`
 
-proc myRenderProc(slides: seq[string]): string =
+proc myRenderProc(slides: seq[string], css: string): string =
   compileTemplateFile(getScriptDir() / "base.html")
 
-proc process_content(content: string): seq[string] =
+proc process_content(content: string): (seq[string], string) =
   var slides: seq[string] = @[]
   var current_content: string
+  var custom_css: string
 
   for line in content.split("\n"):
     case line:
+      of "--css--":
+        # We finished capturing css
+        custom_css = current_content
+        current_content = ""
       of "---":
         # New slide
         # print("New slide with content:", current_content)
@@ -28,8 +33,7 @@ proc process_content(content: string): seq[string] =
     # print(f"Slide {i}:")
     # print(slide)
 
-  return slides
-
+  return (slides, custom_css)
 
 proc fun(file: string, speed_test: bool = false): int =
   print("Preparing generation...")
@@ -38,7 +42,7 @@ proc fun(file: string, speed_test: bool = false): int =
   print("Generated, starting service")
 
   if speed_test == true:
-    discard myRenderProc(slides)
+    discard myRenderProc(slides[0], slides[1])
     result = 0
     return result
 
@@ -47,7 +51,7 @@ proc fun(file: string, speed_test: bool = false): int =
 
   router myrouter:
     get "/":
-      resp myRenderProc(slides)
+      resp myRenderProc(slides[0], slides[1])
 
   var customSettings = newSettings(port = Port(8000))
   var myjester = initJester(myrouter, settings = customSettings)
