@@ -35,6 +35,12 @@ Body
 - list item 2
 > Description
 ![image](image-source.png)
+---
+Note that we use --- to delim the slides.
+You can also add custom css by doing the following
+---
+p { color: red; }
+--css--
 ```
 
 Then you can start nimppt with the following:
